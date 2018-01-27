@@ -2,23 +2,33 @@
 
 
 -- constants
-WINDOW_HEIGHT = 400
-WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 800;
+WINDOW_WIDTH = 1200;
 someVar = 0;
 
+-- libraries
+Class = require 'class';
+push = require 'push';
+require 'Pampa';
 
 -- Will be called when the game is first loaded. Basically the init.
 function love.load()
+    love.graphics.setDefaultFilter('nearest', 'nearest');
 
     -- initialize game components
-    love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT)
+    love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT);
 
     -- set the font
-    mainFont = love.graphics.newFont("MoonFlowerBold.ttf", 100)
-    love.graphics.setFont(mainFont)
+    mainFont = love.graphics.newFont("MoonFlowerBold.ttf", 100);
+    love.graphics.setFont(mainFont);
+
+    -- initialize pampaImage
+    pampaImage = love.graphics.newImage("pamp.png");
+    pampa = Pampa(10, 10, pampaImage);
 
     -- set the color of font and shapes
-    love.graphics.setColor(0,255,255)
+    love.graphics.setColor(0,255,255);
+    love.graphics.setBackgroundColor(255,255,255) ;
 
  end
 
@@ -28,13 +38,11 @@ function love.load()
 
     -- listen for keyboard events
     if love.keyboard.isDown("up") then
+        
+        pampaTalk = true;
 
-    
-        love.graphics.setBackgroundColor(255,255,255) -- WERKT WEL
-        --love.graphics.print("dit is een test 2", 40, 100) -- WERKT NIET
-        someVar = 1;
-    
-
+    elseif love.keyboard.isDown("left") then
+        hoiTia = true;
     end
  end
 
@@ -45,24 +53,35 @@ function love.load()
 -- mind that if you change the font/color/mode/etc at the end of the function then it will have a effect on things at the 
 -- beginning of the function.
 function love.draw()
+
     --love.graphics.print("This text is not black because of the line below", 100, 100)
     --love.graphics.setColor(255,0,0)
     --love.graphics.print("This text is red", 100, 200)
 
     
-    love.graphics.rectangle('fill', 10, WINDOW_HEIGHT/2, 50, 50)
+    -- love.graphics.rectangle('fill', 10, WINDOW_HEIGHT/2, 50, 50)
 
-    if someVar == 1 then
-        love.graphics.print("dit is een test 2", 40, 120) -- dit is blauw omdat de laaste kleur die geset is door draw blauw is, dus de kleur die je set in init wordt overridden
-    end
+    -- if someVar == 1 then
+    --     love.graphics.print("dit is een test 2", 40, 120) -- dit is blauw omdat de laaste kleur die geset is door draw blauw is, dus de kleur die je set in init wordt overridden
+    -- end
     
-    love.graphics.print("dit is een test", 40, 60)
+    -- love.graphics.print("dit is een test", 40, 60)
 
-    love.graphics.setColor(0, 255, 0, 255)
-    love.graphics.print("This is a pretty lame example.", 10, 200)
-    love.graphics.setColor(255, 0, 0, 255)
-    love.graphics.print("This lame example is twice as big.", 10, 250, 0, 2, 2)
-    love.graphics.setColor(0, 0, 255, 255)
-    love.graphics.print("This example is lamely vertical.", 300, 30, math.pi/2)
+    -- love.graphics.setColor(0, 255, 0, 255)
+    -- love.graphics.print("This is a pretty lame example.", 10, 200)
+    -- love.graphics.setColor(255, 0, 0, 255)
+    -- love.graphics.print("This lame example is twice as big.", 10, 250, 0, 2, 2)
+    -- love.graphics.setColor(0, 0, 255, 255)
+    -- love.graphics.print("This example is lamely vertical.", 300, 30, math.pi/2)
+    -- love.graphics.draw(pampaImage, 10, 20)
+
+
+    pampa:render();
+    if pampaTalk then
+        pampa:toekeToek();
+    end
+    if hoiTia then
+        pampa:hoiTia();
+    end
 
 end
