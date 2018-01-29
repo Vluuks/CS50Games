@@ -1,6 +1,5 @@
 -- [[ I am a comment! ]] 
 
-
 -- constants
 WINDOW_HEIGHT = 800;
 WINDOW_WIDTH = 1200;
@@ -37,12 +36,14 @@ function love.load()
  function love.update(dt)
 
     -- listen for keyboard events
-    if love.keyboard.isDown("up") then
-        
-        pampaTalk = true;
-
-    elseif love.keyboard.isDown("left") then
-        hoiTia = true;
+    if love.keyboard.isDown("w") then
+        pampa:updateCoords(dt, "w");
+    elseif love.keyboard.isDown("a") then
+        pampa:updateCoords(dt, "a");
+    elseif love.keyboard.isDown("s") then
+        pampa:updateCoords(dt, "s");
+    elseif love.keyboard.isDown("d") then
+        pampa:updateCoords(dt, "d");
     end
  end
 
