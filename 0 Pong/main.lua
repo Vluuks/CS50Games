@@ -35,6 +35,9 @@ function love.load()
     -- 
  function love.update(dt)
 
+
+    pampa:updateAnimation(dt);
+        
     -- listen for keyboard events
     if love.keyboard.isDown("w") then
         pampa:updateCoords(dt, "w");
