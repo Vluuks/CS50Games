@@ -48,6 +48,13 @@ function love.load()
     elseif love.keyboard.isDown("d") then
         pampa:updateCoords(dt, "d");
     end
+
+
+
+    if love.keyboard.isDown("return") or love.keyboard.isDown("enter") then
+        love.event.quit();
+    end
+
  end
 
 
